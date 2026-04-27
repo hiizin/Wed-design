@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>회원가입 - Natural Harmony Journey</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#4a6545",
+              "on-primary": "#ffffff",
+              "background": "#fbf9f8",
+              "surface": "#fbf9f8",
+              "on-surface": "#1b1c1c",
+              "secondary-container": "#dbe5d8",
+              "on-secondary-container": "#4a6545",
+              "outline": "#73796f",
+              "outline-variant": "#c3c8bd",
+              "surface-container-low": "#f5f3f3",
+              "surface-container": "#efeded",
+              "surface-container-high": "#eae8e7",
+              "surface-container-highest": "#e4e2e2",
+              "surface-container-lowest": "#ffffff",
+              "surface-variant": "#e4e2e2",
+              "primary-container": "#a8c69f",
+              "tertiary": "#48663d",
+              "tertiary-container": "#a5c796",
+              "on-tertiary-container": "#37542d",
+              "on-surface-variant": "#434840",
+              "error": "#ba1a1a",
+              "on-background": "#1b1c1c"
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px"
+            },
+            spacing: {
+              xs: "4px", sm: "8px", md: "16px", lg: "24px",
+              gutter: "24px", xl: "48px", section: "80px",
+              "container-max": "1280px", unit: "4px"
+            },
+            fontFamily: {
+              sans: ["Pretendard", "sans-serif"],
+            },
+            fontSize: {
+              "headline-xl": ["48px", {lineHeight:"1.2", letterSpacing:"-0.02em", fontWeight:"700"}],
+              "headline-lg": ["32px", {lineHeight:"1.3", letterSpacing:"-0.01em", fontWeight:"700"}],
+              "headline-md": ["24px", {lineHeight:"1.4", fontWeight:"600"}],
+              "body-lg": ["18px", {lineHeight:"1.6", fontWeight:"400"}],
+              "body-md": ["16px", {lineHeight:"1.6", fontWeight:"400"}],
+              "label-sm": ["12px", {lineHeight:"1.0", letterSpacing:"0.02em", fontWeight:"600"}]
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        body { background-color: #fbf9f8; color: #1b1c1c; font-family: 'Pretendard', sans-serif; }
+    /* 입력 필드 포커스 */
+    .field-wrap { position: relative; }
+    .field-input {
+        width: 100%;
+        background: #ffffff;
+        border: 1.5px solid #c3c8bd;
+        border-radius: 0.5rem;
+        padding: 14px 76px 14px 56px;
+        font-size: 16px;
+        font-family: 'Pretendard', sans-serif;
+        color: #1b1c1c;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .field-input:focus {
+        border-color: #4a6545;
+        box-shadow: 0 0 0 3px rgba(74,101,69,0.1);
+    }
+    .field-input.error {
+        border-color: #ba1a1a;
+        box-shadow: 0 0 0 3px rgba(186,26,26,0.08);
+    }
+    .field-input.valid {
+        border-color: #4a6545;
+    }
+    .field-icon {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #73796f;
+        font-size: 20px;
+        pointer-events: none;
+        transition: color 0.2s;
+        z-index: 1;
+    }
+    .field-right-icon {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #73796f;
+        font-size: 20px;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+    .field-right-icon:hover { color: #4a6545; }
+
+
+    /* 비밀번호 강도 바 */
+    .strength-bar { transition: width 0.4s ease, background-color 0.4s ease; }
+
+    /* 체크박스 커스텀 */
+    .custom-checkbox {
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border: 1.5px solid #c3c8bd;
+        border-radius: 4px;
+        background: #fff;
+        cursor: pointer;
+        transition: all 0.2s;
+        flex-shrink: 0;
+        position: relative;
+    }
+    .custom-checkbox:checked {
+        background: #4a6545;
+        border-color: #4a6545;
+    }
+    .custom-checkbox:checked::after {
+        content: '';
+        position: absolute;
+        left: 4px; top: 1px;
+        width: 6px; height: 10px;
+        border: 2px solid white;
+        border-top: none; border-left: none;
+        transform: rotate(45deg);
+    }
+
+    /* 페이지 진입 애니메이션 */
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up-1 { animation: fadeUp 0.5s ease-out 0.05s both; }
+    .fade-up-2 { animation: fadeUp 0.5s ease-out 0.15s both; }
+    .fade-up-3 { animation: fadeUp 0.5s ease-out 0.25s both; }
+
+    /* 좌측 패널 잎 장식 */
+    @keyframes leafFloat {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-12px) rotate(3deg); }
+    }
+    .leaf-1 { animation: leafFloat 6s ease-in-out infinite; }
+    .leaf-2 { animation: leafFloat 8s ease-in-out 1s infinite; }
+    .leaf-3 { animation: leafFloat 7s ease-in-out 2s infinite; }
+</style>
+
+</head>
+
+<body class="font-sans overflow-x-hidden min-h-screen">
+
+<!-- 공통 헤더 -->
+<header data-nhj-header></header>
+
+<main class="min-h-[calc(100vh-80px)] grid grid-cols-1 lg:grid-cols-2">
+
+    <!-- 좌측: 비주얼 패널 -->
+    <div class="hidden lg:flex relative overflow-hidden bg-[#4a6545]">
+        <!-- 배경 이미지 -->
+        <img
+            src="https://cdn.cosmos.so/176c74b7-5936-4a06-b5a7-1fdf76c2b0f0?format=jpeg"
+            alt="Botanical"
+            class="absolute inset-0 w-full h-full object-cover object-center opacity-20"
+        />
+        <!-- 그라디언트 오버레이 -->
+        <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(74,101,69,0.97) 0%, rgba(45,63,42,0.95) 100%);"></div>
+
+        <!-- 잎 장식 SVG -->
+        <div class="absolute top-16 right-12 opacity-20 leaf-1">
+            <svg width="120" height="160" viewBox="0 0 120 160" fill="none">
+                <path d="M60 160C60 160 0 110 0 60C0 26.9 26.9 0 60 0C93.1 0 120 26.9 120 60C120 110 60 160 60 160Z" fill="white"/>
+            </svg>
+        </div>
+        <div class="absolute bottom-32 left-8 opacity-15 leaf-2">
+            <svg width="80" height="110" viewBox="0 0 80 110" fill="none">
+                <path d="M40 110C65 95 80 70 80 45C80 20.1 62.1 0 40 0C17.9 0 0 20.1 0 45C0 70 15 95 40 110Z" fill="white"/>
+            </svg>
+        </div>
+        <div class="absolute top-1/2 left-1/3 opacity-10 leaf-3">
+            <svg width="60" height="80" viewBox="0 0 60 80" fill="none">
+                <path d="M30 80C30 80 0 55 0 30C0 13.4 13.4 0 30 0C46.6 0 60 13.4 60 30C60 55 30 80 30 80Z" fill="white"/>
+            </svg>
+        </div>
+
+        <!-- 콘텐츠 -->
+        <div class="relative z-10 flex flex-col justify-between p-16 w-full">
+            <div>
+                <div class="inline-block mb-8 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20">
+                    <span class="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/80">Premium Botanical Life</span>
+                </div>
+                <h2 class="text-[40px] font-bold leading-tight text-white mb-6">
+                    자연과 함께하는<br/>나만의 공간
+                </h2>
+                <p class="text-white/70 text-[17px] leading-relaxed max-w-sm">
+                    회원이 되시면 식물 성향 테스트, 맞춤 추천, 구매 혜택까지 모든 보태니컬 여정을 함께합니다.
+                </p>
+            </div>
+
+            <!-- 혜택 카드들 -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10">
+                    <div class="w-10 h-10 rounded-lg bg-white/15 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-white text-xl">psychiatry</span>
+                    </div>
+                    <div>
+                        <p class="text-white font-semibold text-sm">맞춤 식물 추천</p>
+                        <p class="text-white/60 text-xs mt-0.5">나의 라이프스타일에 맞는 식물을 찾아드립니다</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10">
+                    <div class="w-10 h-10 rounded-lg bg-white/15 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-white text-xl">local_florist</span>
+                    </div>
+                    <div>
+                        <p class="text-white font-semibold text-sm">전문 식물 케어 가이드</p>
+                        <p class="text-white/60 text-xs mt-0.5">계절별 관리법과 전문가 팁을 무료로 제공</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/10">
+                    <div class="w-10 h-10 rounded-lg bg-white/15 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-white text-xl">redeem</span>
+                    </div>
+                    <div>
+                        <p class="text-white font-semibold text-sm">신규 회원 혜택</p>
+                        <p class="text-white/60 text-xs mt-0.5">첫 구매 시 10% 할인 쿠폰 즉시 지급</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 우측: 회원가입 폼 -->
+    <div class="flex items-center justify-center px-6 py-16 md:px-12 bg-[#fbf9f8]">
+        <div class="w-full max-w-[480px]">
+
+            <!-- 헤더 -->
+            <div class="mb-10 fade-up-1">
+                <span class="text-[12px] font-semibold tracking-[0.2em] text-primary uppercase block mb-3">Join Us</span>
+                <h1 class="text-[32px] font-bold leading-tight text-on-surface mb-2">회원가입</h1>
+                <p class="text-[16px] text-outline">이미 계정이 있으신가요? <a href="#" class="text-primary font-semibold hover:underline underline-offset-2">로그인</a></p>
+            </div>
+
+            <!-- 폼 -->
+            <div class="space-y-5 fade-up-2">
+
+                <!-- 이름 -->
+                <div>
+                    <div class="field-wrap" style="position:relative;">
+                        <input
+                            type="text"
+                            id="name"
+                            class="field-input"
+                            placeholder="이름"
+                            oninput="validateName(this)"
+                        />
+                        <span id="name-check" class="field-right-icon hidden material-symbols-outlined" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);"></span>
+                    </div>
+                    <p id="name-msg" class="mt-1.5 text-[12px] font-semibold hidden"></p>
+                </div>
+
+                <!-- 이메일 -->
+                <div>
+                    <div class="field-wrap" style="position:relative;">
+                        <input
+                            type="email"
+                            id="email"
+                            class="field-input"
+                            placeholder="이메일 주소"
+                            oninput="validateEmail(this)"
+                        />
+                        <span id="email-check" class="field-right-icon hidden material-symbols-outlined" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);"></span>
+                    </div>
+                    <p id="email-msg" class="mt-1.5 text-[12px] font-semibold hidden"></p>
+                </div>
+
+                <!-- 비밀번호 -->
+                <div>
+                    <div class="field-wrap" style="position:relative;">
+                        <input
+                            type="password"
+                            id="password"
+                            class="field-input"
+                            placeholder="비밀번호 (8자 이상)"
+                            oninput="validatePassword(this)"
+                        />
+                        <span class="material-symbols-outlined" style="position:absolute;right:22px;top:50%;transform:translateY(-50%);color:#73796f;font-size:20px;cursor:pointer;" onclick="togglePassword('password', this)">visibility_off</span>
+                    </div>
+                    <!-- 강도 바 -->
+                    <div class="mt-2.5 flex gap-1.5">
+                        <div class="flex-1 h-1 rounded-full bg-surface-container-highest overflow-hidden">
+                            <div id="bar-1" class="h-full strength-bar w-0 rounded-full"></div>
+                        </div>
+                        <div class="flex-1 h-1 rounded-full bg-surface-container-highest overflow-hidden">
+                            <div id="bar-2" class="h-full strength-bar w-0 rounded-full"></div>
+                        </div>
+                        <div class="flex-1 h-1 rounded-full bg-surface-container-highest overflow-hidden">
+                            <div id="bar-3" class="h-full strength-bar w-0 rounded-full"></div>
+                        </div>
+                    </div>
+                    <p id="strength-msg" class="mt-1.5 text-[12px] font-semibold text-outline hidden"></p>
+                </div>
+
+                <!-- 비밀번호 확인 -->
+                <div>
+                    <div class="field-wrap" style="position:relative;">
+                        <input
+                            type="password"
+                            id="password-confirm"
+                            class="field-input"
+                            placeholder="비밀번호 확인"
+                            oninput="validateConfirm(this)"
+                        />
+                        <span class="material-symbols-outlined" style="position:absolute;right:22px;top:50%;transform:translateY(-50%);color:#73796f;font-size:20px;cursor:pointer;" onclick="togglePassword('password-confirm', this)">visibility_off</span>
+                    </div>
+                    <p id="confirm-msg" class="mt-1.5 text-[12px] font-semibold hidden"></p>
+                </div>
+
+                <!-- 전화번호 (선택) -->
+                <div class="field-wrap">
+                    <input
+                        type="tel"
+                        id="phone"
+                        class="field-input"
+                        placeholder="휴대폰 번호 (선택)"
+                        oninput="formatPhone(this)"
+                    />
+                </div>
+
+                <!-- 구분선 -->
+                <div class="flex items-center gap-4 py-1">
+                    <div class="flex-1 h-px bg-outline-variant/40"></div>
+                    <span class="text-[12px] font-semibold text-outline">약관 동의</span>
+                    <div class="flex-1 h-px bg-outline-variant/40"></div>
+                </div>
+
+                <!-- 약관 동의 -->
+                <div class="space-y-3">
+                    <!-- 전체 동의 -->
+                    <label class="flex items-center gap-3 cursor-pointer group p-4 rounded-xl bg-secondary-container/40 border border-[#4a6545]/10 hover:bg-secondary-container/60 transition-colors">
+                        <input type="checkbox" id="agree-all" class="custom-checkbox" onchange="toggleAll(this)"/>
+                        <div>
+                            <span class="text-[14px] font-bold text-on-surface">전체 동의</span>
+                            <p class="text-[12px] text-outline mt-0.5">선택 약관을 포함한 모든 항목에 동의합니다</p>
+                        </div>
+                    </label>
+
+                    <div class="space-y-2.5 pl-2">
+                        <label class="flex items-center gap-3 cursor-pointer">
+                            <input type="checkbox" class="custom-checkbox agree-item" onchange="updateAll()"/>
+                            <span class="text-[13px] text-on-surface-variant"><span class="text-error font-semibold">[필수]</span> 이용약관 동의</span>
+                            <a href="#" class="ml-auto text-[12px] text-outline hover:text-primary transition-colors flex-shrink-0">보기</a>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer">
+                            <input type="checkbox" class="custom-checkbox agree-item" onchange="updateAll()"/>
+                            <span class="text-[13px] text-on-surface-variant"><span class="text-error font-semibold">[필수]</span> 개인정보 수집 및 이용 동의</span>
+                            <a href="#" class="ml-auto text-[12px] text-outline hover:text-primary transition-colors flex-shrink-0">보기</a>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer">
+                            <input type="checkbox" class="custom-checkbox agree-item" onchange="updateAll()"/>
+                            <span class="text-[13px] text-on-surface-variant"><span class="text-outline">[선택]</span> 마케팅 정보 수신 동의</span>
+                            <a href="#" class="ml-auto text-[12px] text-outline hover:text-primary transition-colors flex-shrink-0">보기</a>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 제출 버튼 -->
+                <button
+                    id="submit-btn"
+                    onclick="handleSubmit()"
+                    class="w-full bg-primary text-on-primary py-4 rounded-xl font-bold text-[16px] hover:bg-primary/90 transition-all duration-300 active:scale-[0.98] shadow-lg shadow-primary/20 flex items-center justify-center gap-2 mt-2"
+                >
+                    <span>회원가입 완료</span>
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                </button>
+
+                <!-- 소셜 로그인 구분선 -->
+                <div class="flex items-center gap-4">
+                    <div class="flex-1 h-px bg-outline-variant/40"></div>
+                    <span class="text-[12px] font-semibold text-outline">또는</span>
+                    <div class="flex-1 h-px bg-outline-variant/40"></div>
+                </div>
+
+                <!-- 소셜 로그인 -->
+                <div class="grid grid-cols-2 gap-3">
+                    <button class="flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl border border-outline-variant/60 bg-white hover:border-primary/30 hover:bg-surface-container-low transition-all duration-200 active:scale-[0.98]">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                            <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
+                            <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/>
+                            <path d="M3.964 10.707A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" fill="#FBBC05"/>
+                            <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.96L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+                        </svg>
+                        <span class="text-[13px] font-semibold text-on-surface">Google</span>
+                    </button>
+                    <button class="flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl border border-outline-variant/60 bg-[#FEE500] hover:bg-[#FDD800] transition-all duration-200 active:scale-[0.98]">
+                        <svg width="18" height="17" viewBox="0 0 18 17" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9 0C4.029 0 0 3.136 0 7.001c0 2.507 1.625 4.708 4.071 5.95-.179.669-.647 2.42-.741 2.796-.116.465.17.459.358.334.147-.097 2.336-1.588 3.28-2.23.327.046.661.07 1.032.07 4.971 0 9-3.136 9-7.001C18 3.136 13.971 0 9 0z" fill="#3A1D1D"/>
+                        </svg>
+                        <span class="text-[13px] font-semibold text-[#3A1D1D]">카카오</span>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- 로그인 링크 -->
+            <p class="mt-8 text-center text-[14px] text-outline fade-up-3">
+                이미 계정이 있으신가요?
+                <a href="#" class="text-primary font-bold hover:underline underline-offset-2 ml-1">로그인하기</a>
+            </p>
+        </div>
+    </div>
+</main>
+
+<!-- 공통 푸터 -->
+<footer data-nhj-footer></footer>
+
+<script>
+    /* ── 비밀번호 표시/숨김 ── */
+    function togglePassword(id, icon) {
+        const input = document.getElementById(id);
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.innerText = 'visibility';
+        } else {
+            input.type = 'password';
+            icon.innerText = 'visibility_off';
+        }
+    }
+
+    /* ── 이름 유효성 ── */
+    function validateName(input) {
+        const msg = document.getElementById('name-msg');
+        const icon = document.getElementById('name-check');
+        if (input.value.length === 0) {
+            input.closest('.field-wrap').classList.remove('valid','error');
+            msg.classList.add('hidden');
+            icon.classList.add('hidden');
+            return;
+        }
+        if (input.value.length < 2) {
+            setFieldState(input, msg, icon, false, '이름은 2자 이상 입력해주세요.');
+        } else {
+            setFieldState(input, msg, icon, true, '');
+        }
+    }
+
+    /* ── 이메일 유효성 ── */
+    function validateEmail(input) {
+        const msg = document.getElementById('email-msg');
+        const icon = document.getElementById('email-check');
+        if (input.value.length === 0) {
+            input.closest('.field-wrap').classList.remove('valid','error');
+            msg.classList.add('hidden');
+            icon.classList.add('hidden');
+            return;
+        }
+        const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value);
+        setFieldState(input, msg, icon, ok, ok ? '' : '올바른 이메일 주소를 입력해주세요.');
+    }
+
+    /* ── 비밀번호 강도 ── */
+    function validatePassword(input) {
+        const val = input.value;
+        const msg = document.getElementById('strength-msg');
+        const bars = [
+            document.getElementById('bar-1'),
+            document.getElementById('bar-2'),
+            document.getElementById('bar-3'),
+        ];
+
+        if (val.length === 0) {
+            bars.forEach(b => { b.style.width = '0'; b.style.backgroundColor = ''; });
+            msg.classList.add('hidden');
+            input.closest('.field-wrap').classList.remove('valid','error');
+            return;
+        }
+
+        let score = 0;
+        if (val.length >= 8) score++;
+        if (/[A-Z]/.test(val) || /[a-z]/.test(val)) score++;
+        if (/[0-9]/.test(val) && /[^A-Za-z0-9]/.test(val)) score++;
+
+        const colors = ['#ba1a1a', '#e8800a', '#4a6545'];
+        const labels = ['약함', '보통', '강함'];
+
+        bars.forEach((b, i) => {
+            if (i < score) {
+                b.style.width = '100%';
+                b.style.backgroundColor = colors[score - 1];
+            } else {
+                b.style.width = '0';
+                b.style.backgroundColor = '';
+            }
+        });
+
+        msg.innerText = `비밀번호 강도: ${labels[score - 1]}`;
+        msg.style.color = colors[score - 1];
+        msg.classList.remove('hidden');
+
+        const wrap = input.closest('.field-wrap');
+        if (val.length < 8) {
+            wrap.classList.add('error');
+            wrap.classList.remove('valid');
+        } else {
+            wrap.classList.add('valid');
+            wrap.classList.remove('error');
+        }
+
+        // 확인 재검증
+        const confirm = document.getElementById('password-confirm');
+        if (confirm.value) validateConfirm(confirm);
+    }
+
+    /* ── 비밀번호 확인 ── */
+    function validateConfirm(input) {
+        const pw = document.getElementById('password').value;
+        const msg = document.getElementById('confirm-msg');
+        if (input.value.length === 0) {
+            input.closest('.field-wrap').classList.remove('valid','error');
+            msg.classList.add('hidden');
+            return;
+        }
+        const ok = input.value === pw;
+        input.closest('.field-wrap').classList.toggle('valid', ok);
+        input.closest('.field-wrap').classList.toggle('error', !ok);
+        msg.innerText = ok ? '비밀번호가 일치합니다.' : '비밀번호가 일치하지 않습니다.';
+        msg.style.color = ok ? '#4a6545' : '#ba1a1a';
+        msg.classList.remove('hidden');
+    }
+
+    /* ── 전화번호 포맷 ── */
+    function formatPhone(input) {
+        let v = input.value.replace(/\D/g, '');
+        if (v.length <= 3) input.value = v;
+        else if (v.length <= 7) input.value = v.slice(0,3) + '-' + v.slice(3);
+        else input.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
+    }
+
+    /* ── 전체 동의 ── */
+    function toggleAll(master) {
+        document.querySelectorAll('.agree-item').forEach(cb => cb.checked = master.checked);
+    }
+    function updateAll() {
+        const items = document.querySelectorAll('.agree-item');
+        document.getElementById('agree-all').checked = [...items].every(cb => cb.checked);
+    }
+
+    /* ── 필드 상태 헬퍼 ── */
+    function setFieldState(input, msg, icon, valid, text) {
+        const wrap = input.closest('.field-wrap');
+        wrap.classList.toggle('valid', valid);
+        wrap.classList.toggle('error', !valid);
+        icon.innerText = valid ? 'check_circle' : 'error';
+        icon.style.color = valid ? '#4a6545' : '#ba1a1a';
+        icon.classList.remove('hidden');
+        if (text) {
+            msg.innerText = text;
+            msg.style.color = '#ba1a1a';
+            msg.classList.remove('hidden');
+        } else {
+            msg.classList.add('hidden');
+        }
+    }
+
+    /* ── 제출 ── */
+    function handleSubmit() {
+        const name = document.getElementById('name');
+        const email = document.getElementById('email');
+        const pw = document.getElementById('password');
+        const pwc = document.getElementById('password-confirm');
+        const required = document.querySelectorAll('.agree-item:not(:last-child)');
+
+        validateName(name);
+        validateEmail(email);
+        validatePassword(pw);
+        validateConfirm(pwc);
+
+        const valid =
+            name.closest('.field-wrap').classList.contains('valid') &&
+            email.closest('.field-wrap').classList.contains('valid') &&
+            pw.closest('.field-wrap').classList.contains('valid') &&
+            pwc.closest('.field-wrap').classList.contains('valid') &&
+            [...required].every(cb => cb.checked);
+
+        if (!valid) {
+            const btn = document.getElementById('submit-btn');
+            btn.classList.add('shake');
+            setTimeout(() => btn.classList.remove('shake'), 500);
+            return;
+        }
+
+        // 성공 처리
+        const btn = document.getElementById('submit-btn');
+        btn.innerHTML = '<span class="material-symbols-outlined text-[18px]" style="font-variation-settings:\'FILL\' 1">check_circle</span><span>가입 완료!</span>';
+        btn.classList.add('opacity-80', 'cursor-default');
+        btn.disabled = true;
+        setTimeout(() => { location.href = 'indexnewmain.html'; }, 1200);
+    }
+</script>
+<style>
+    @keyframes shake {
+        0%,100% { transform: translateX(0); }
+        20%,60% { transform: translateX(-6px); }
+        40%,80% { transform: translateX(6px); }
+    }
+    .shake { animation: shake 0.4s ease; }
+</style>
+<script src="nhj-common.js"></script>
+</body>
+</html>

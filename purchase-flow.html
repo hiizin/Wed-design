@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>구매하기 - Natural Harmony Journey</title>
+
+  <!-- 폰트: Pretendard (indexjoin.html과 동일) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    crossorigin=""
+  />
+  <!-- Material Symbols -->
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+  />
+
+  <style>
+    /* =============================================
+       1. CSS 변수 및 리셋
+    ============================================= */
+    :root {
+      --primary:        #4a6545;
+      --primary-dark:   #3a5036;
+      --primary-light:  #dbe5d8;
+      --accent:         #a8c69f;
+      --bg:             #fbf9f8;
+      --surface:        #ffffff;
+      --border:         #c3c8bd;
+      --text:           #1b1c1c;
+      --text-muted:     #73796f;
+      --error:          #ba1a1a;
+      --error-light:    rgba(186,26,26,0.08);
+      --shadow-sm:      0 1px 4px rgba(74,101,69,0.08);
+      --shadow-md:      0 4px 20px rgba(74,101,69,0.12);
+      --shadow-lg:      0 8px 40px rgba(74,101,69,0.18);
+      --radius:         0.5rem;
+      --radius-lg:      0.75rem;
+      --radius-full:    9999px;
+      --transition:     0.22s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* =============================================
+       3. 메인 레이아웃
+    ============================================= */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 16px 80px;
+    }
+
+    /* =============================================
+       4. 스텝 컨테이너 (카드)
+    ============================================= */
+    .step-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      width: 100%;
+      max-width: 560px;
+      overflow: hidden;
+      /* 각 스텝은 display:none / display:block 으로 전환 */
+    }
+
+    /* 상단 진행 표시바 */
+    .progress-bar {
+      height: 4px;
+      background: var(--primary-light);
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--primary);
+      transition: width 0.4s ease;
+    }
+
+    /* 스텝 헤더 */
+    .step-header {
+      padding: 32px 36px 0;
+    }
+    .step-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .step-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+    .step-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    /* 스텝 바디 */
+    .step-body {
+      padding: 28px 36px 36px;
+    }
+
+    /* =============================================
+       5. 버튼 스타일
+    ============================================= */
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: var(--radius);
+      border: none;
+      font-family: 'Pretendard', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 4px 16px rgba(74,101,69,0.3);
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      background: #fff;
+      color: var(--primary);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      transform: translateY(-1px);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 400;
+      padding: 8px;
+    }
+    .btn-ghost:hover { color: var(--primary); }
+
+    /* 카카오페이 버튼 */
+    .btn-kakao {
+      background: #FEE500;
+      color: #3C1E1E;
+      border: none;
+    }
+    .btn-kakao:hover {
+      background: #f5dc00;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(254,229,0,0.4);
+    }
+
+    /* 네이버페이 버튼 */
+    .btn-naver {
+      background: #03C75A;
+      color: #fff;
+      border: none;
+    }
+    .btn-naver:hover {
+      background: #02b350;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(3,199,90,0.35);
+    }
+
+    /* 버튼 그룹 */
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .btn-group-row {
+      display: flex;
+      gap: 10px;
+    }
+    .btn-group-row .btn { flex: 1; }
+
+    /* =============================================
+       6. 구분선
+    ============================================= */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 20px 0;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* =============================================
+       7. 폼 인풋 스타일
+    ============================================= */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .form-group:last-child { margin-bottom: 0; }
+
+    .form-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .form-label .required {
+      color: var(--primary);
+      margin-left: 2px;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-family: 'Pretendard', sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      background: #fff;
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(74,101,69,0.1);
+    }
+    .form-input.error,
+    .form-select.error { border-color: var(--error); box-shadow: 0 0 0 3px var(--error-light); }
+
+    .form-textarea { resize: vertical; min-height: 80px; }
+    .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2373796f' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 38px; }
+
+    .form-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .form-error {
+      font-size: 12px;
+      color: var(--error);
+      display: none;
+    }
+    .form-error.show { display: block; }
+
+    /* 섹션 소제목 */
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--primary);
+      border-bottom: 1px solid var(--primary-light);
+      padding-bottom: 8px;
+      margin: 24px 0 16px;
+    }
+    .section-title:first-child { margin-top: 0; }
+
+    /* 주소 행 */
+    .addr-row {
+      display: flex;
+      gap: 8px;
+    }
+    .addr-row .form-input { flex: 1; }
+    .addr-row .btn-addr {
+      padding: 12px 16px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all var(--transition);
+    }
+    .addr-row .btn-addr:hover { background: var(--accent); }
+
+    /* =============================================
+       8. 약관 체크박스
+    ============================================= */
+    .terms-box {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .terms-all {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      background: var(--primary-light);
+      cursor: pointer;
+    }
+    .terms-all span.label {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--primary-dark);
+    }
+    .terms-list {
+      border-top: 1px solid var(--border);
+    }
+    .terms-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--primary-light);
+      gap: 10px;
+    }
+    .terms-item:last-child { border-bottom: none; }
+    .terms-item-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+    }
+    .terms-item-left label {
+      font-size: 13px;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .terms-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: var(--radius-full);
+      background: var(--primary);
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+    .terms-badge.optional {
+      background: var(--border);
+      color: var(--text-muted);
+    }
+    .terms-view {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-decoration: underline;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .terms-view:hover { color: var(--primary); }
+
+    /* 커스텀 체크박스 */
+    .custom-cb {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 4px;
+      background: #fff;
+      cursor: pointer;
+      transition: all var(--transition);
+      position: relative;
+    }
+    .custom-cb:checked {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+    .custom-cb:checked::after {
+      content: '';
+      position: absolute;
+      left: 4px; top: 1px;
+      width: 6px; height: 10px;
+      border: 2px solid #fff;
+      border-top: none; border-left: none;
+      transform: rotate(45deg);
+    }
+
+    /* =============================================
+       9. 주문 요약 박스
+    ============================================= */
+    .order-summary {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .order-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--primary-dark);
+      margin-top: 4px;
+    }
+    .order-item-name { font-size: 13px; color: var(--text-muted); }
+    .order-item-price { font-size: 14px; font-weight: 600; color: var(--text); }
+
+    /* =============================================
+       10. 결제 수단 선택 버튼들
+    ============================================= */
+    .pay-btn-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    /* =============================================
+       11. 모달 (결제 진행 + 완료 메시지)
+    ============================================= */
+    .modal-overlay {
+      display: none; /* JS로 show */
+      position: fixed;
+      inset: 0;
+      background: rgba(27,28,28,0.55);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.show { display: flex; }
+
+    .modal-box {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      width: 90%;
+      max-width: 380px;
+      padding: 48px 36px;
+      text-align: center;
+      animation: modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.88) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* 로딩 스피너 */
+    .spinner {
+      width: 52px;
+      height: 52px;
+      border: 4px solid var(--primary-light);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .modal-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* 완료 아이콘 */
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--primary-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .success-icon .material-symbols-outlined {
+      font-size: 36px;
+      color: var(--primary);
+      font-variation-settings: 'FILL' 1, 'wght' 400;
+    }
+
+    .phone-cta {
+      margin-top: 24px;
+      background: var(--primary-light);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+    }
+    .phone-cta p {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      line-height: 1.5;
+    }
+    .phone-cta .sub {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* =============================================
+       12. 뒤로가기 + 단계 표시
+    ============================================= */
+    .step-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 36px;
+      border-top: 1px solid var(--primary-light);
+      background: var(--bg);
+    }
+    .step-nav .step-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .step-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: all var(--transition);
+    }
+    .step-dot.active {
+      background: var(--primary);
+      width: 20px;
+      border-radius: var(--radius-full);
+    }
+
+    /* =============================================
+       13. 페이드 전환 애니메이션
+    ============================================= */
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .step-card.animate { animation: fadeSlideIn 0.35s ease both; }
+
+    /* =============================================
+       14. Material Symbols 세팅
+    ============================================= */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+      font-size: 20px;
+    }
+
+    /* =============================================
+       15. 반응형
+    ============================================= */
+    @media (max-width: 600px) {
+      .step-header { padding: 24px 20px 0; }
+      .step-body   { padding: 20px 20px 28px; }
+      .step-nav    { padding: 12px 20px; }
+    }
+
+    /* =============================================
+       16. 흔들기 애니메이션 (유효성 실패)
+    ============================================= */
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%,60% { transform: translateX(-6px); }
+      40%,80% { transform: translateX(6px); }
+    }
+    .shake { animation: shake 0.4s ease; }
+
+    /* =============================================
+       17. 로그인 단계 소셜 힌트
+    ============================================= */
+    .login-help {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 16px;
+    }
+    .login-help a {
+      color: var(--primary);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== 메인 ===== -->
+  <main>
+    <!-- ★ 진행 표시 (progress bar + dots)는 각 스텝 상단에 동적으로 반영됨 -->
+
+    <!-- ===================================================
+         STEP 0: 구매 방식 선택
+    =================================================== -->
+    <div class="step-card" id="step-0">
+      <!-- 진행 바 -->
+      <div class="progress-bar"><div class="progress-bar-fill" style="width:20%"></div></div>
+
+      <div class="step-header">
+        <div class="step-label">STEP 1 / 5</div>
+        <div class="step-title">구매 방식 선택</div>
+        <div class="step-subtitle">편한 방식으로 구매를 진행해주세요.</div>
+      </div>
+
+      <div class="step-body">
+        <!-- 주문 상품 미니 요약 -->
+        <div class="order-summary" id="order-summary-box">
+          <div class="order-item">
+            <span class="order-item-name">불러오는 중...</span>
+            <span class="order-item-price">-</span>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <!-- 회원 구매 버튼 -->
+          <button class="btn btn-primary" onclick="goStep(1)">
+            <span class="material-symbols-outlined">person</span>
+            회원으로 구매하기
+          </button>
+          <!-- 비회원 구매 버튼 -->
+          <button class="btn btn-outline" onclick="goStep(2)">
+            <span class="material-symbols-outlined">shopping_bag</span>
+            비회원으로 구매하기
+          </button>
+        </div>
+      </div>
+
+      <!-- 단계 점 네비 -->
+      <div class="step-nav">
+        <button class="btn btn-ghost" style="visibility:hidden;">← 이전</button>
+        <div class="step-dots">
+          <div class="step-dot active"></div>
+          <div class="step-dot"></div>
+          <div class="step-dot"></div>
+          <div class="step-dot"></div>
+          <div class="step-dot"></div>
+        </div>
+      </div>
+    </div><!-- /step-0 -->
+
+    <!-- ===================================================
+         STEP 1: 회원 로그인
+    =================================================== -->
+    <div class="step-card" id="step-1" style="display:none;">
+      <div class="progress-bar"><div class="progress-bar-fill" style="width:40%"></div></div>
+
+      <div class="step-header">
+        <div class="step-label">STEP 2 / 5</div>
+        <div class="step-title">회원 로그인</div>
+        <div class="step-subtitle">아이디와 비밀번호를 입력해주세요.</div>
+      </div>
+
+      <div class="step-body">
+        <div class="form-group">
+          <label class="form-label" for="login-id">
+            아이디 <span class="required">*</span>
+          </label>
+          <input
+            class="form-input" id="login-id"
+            type="text" placeholder="아이디를 입력하세요"
+            autocomplete="username"
+          />
+          <span class="form-error" id="err-login-id">아이디를 입력해주세요.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="login-pw">
+            비밀번호 <span class="required">*</span>
+          </label>
+          <input
+            class="form-input" id="login-pw"
+            type="password" placeholder="비밀번호를 입력하세요"
+            autocomplete="current-password"
+          />
+          <span class="form-error" id="err-login-pw">비밀번호를 입력해주세요.</span>
+        </div>
+
+        <button class="btn btn-primary" onclick="handleLogin()" style="margin-top:8px;">
+          <span class="material-symbols-outlined">login</span>
+          로그인 후 구매 계속하기
+        </button>
+
+        <div class="login-help">
+          아이디/비밀번호를 잊으셨나요? <a href="#">찾기</a>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn btn-ghost" onclick="goStep(0)">← 이전</button>
+        <div class="step-dots">
+          <div class="step-dot"></div>
+          <div class="step-dot active"></div>
+          <div class="step-dot"></div>
+          <div class="step-dot"></div>
+          <div class="step-dot"></div>
+        </div>
+      </div>
+    </div><!-- /step-1 -->
+
+    <!-- ===================================================
+         STEP 2: 비회원 주문/배송 정보 입력
+    =================================================== -->
+    <div class="step-card" id="step-2" style="display:none;">
+      <div class="progress-bar"><div class="progress-bar-fill" style="width:40%"></div></div>
+
+      <div class="step-header">
+        <div class="step-label">STEP 2 / 5</div>
+        <div class="step-title">주문 정보 입력</div>
+        <div class="step-subtitle">주문자 및 배송 정보를 입력해주세요.</div>
+      </div>
+
+      <div class="step-body">
+
+        <!-- 주문자 정보 -->
+        <div class="section-title">주문자 정보</div>
+
+        <div class="form-group">
+          <label class="form-label" for="buyer-name">
+            이름 <span class="required">*</span>
+          </label>
+          <input
+            class="form-input" id="buyer-name"
+            type="text" placeholder="홍길동"
+          />
+          <span class="form-error" id="err-buyer-name">이름을 입력해주세요.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="buyer-phone">
+            연락처 <span class="required">*</span>
+          </label>
+          <input
+            class="form-input" id="buyer-phone"
+            type="tel" placeholder="010-0000-0000"
+            oninput="formatPhoneInput(this)"
+          />
+          <span class="form-error" id="err-buyer-phone">연락처를 입력해주세요.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="buyer-email">
+            이메일 <span class="required">*</span>
+          </label>
+          <input
+            class="form-input" id="buyer-email"
+            type="email" placeholder="example@email.com"
+          />
+          <span class="form-error" id="err-buyer-email">올바른 이메일을 입력해주세요.</span>
+        </div>
+
+        <!-- 배송 정보 -->
+        <div class="section-title">배송 정보</div>
+
+        <div class="form-group">
+          <label class="form-label" for="addr-zip">
+            주소 <span class="required">*</span>
+          </label>
+          <div class="addr-row">
+            <input
+              class="form-input" id="addr-zip"
+              type="text" placeholder="우편번호" readonly
+              style="max-width:140px;"
+            />
+            <button class="btn-addr" onclick="fillDemoAddress()">주소 검색</button>
+          </div>
+          <input
+            class="form-input" id="addr-main"
+            type="text" placeholder="기본주소" readonly
+            style="margin-top:8px;"
+          />
+          <span class="form-error" id="err-addr">주소를 검색해주세요.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="addr-detail">
+            상세주소 <span class="required">*</span>
+          </label>
+          <input
+            class="form-input" id="addr-detail"
+            type="text" placeholder="동/호수 등 상세주소 입력"
+          />
+          <span class="form-error" id="err-addr-detail">상세주소를 입력해주세요.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="delivery-req">배송 요청사항</label>
+          <select class="form-select" id="delivery-req" onchange="toggleCustomReq(this)">
+            <option value="">-- 선택해주세요 --</option>
+            <option value="door">문 앞에 놓아주세요</option>
+            <option value="call">배송 전 연락 바랍니다</option>
+            <option value="security">경비실에 맡겨주세요</option>
+            <option value="custom">직접 입력</option>
+          </select>
+          <textarea
+            class="form-textarea" id="custom-req"
+            placeholder="배송 요청사항을 직접 입력해주세요."
+            style="display:none;margin-top:8px;"
+          ></textarea>
+        </div>
+
+        <!-- 약관 동의 -->
+        <div class="section-title">약관 동의</div>
+
+        <div class="terms-box">
+          <!-- 전체 동의 -->
+          <label class="terms-all" for="terms-all">
+            <input type="checkbox" class="custom-cb" id="terms-all" onchange="toggleAllTerms(this)" />
+            <span class="label">전체 동의</span>
+          </label>
+          <!-- 개별 약관 목록 -->
+          <div class="terms-list">
+            <div class="terms-item">
+              <div class="terms-item-left">
+                <input type="checkbox" class="custom-cb terms-cb" id="t1" onchange="syncAllTerms()" />
+                <label for="t1">이용약관 동의</label>
+                <span class="terms-badge">필수</span>
+              </div>
+              <span class="terms-view" onclick="alert('이용약관 내용입니다.')">보기</span>
+            </div>
+            <div class="terms-item">
+              <div class="terms-item-left">
+                <input type="checkbox" class="custom-cb terms-cb" id="t2" onchange="syncAllTerms()" />
+                <label for="t2">개인정보 수집·이용 동의</label>
+                <span class="terms-badge">필수</span>
+              </div>
+              <span class="terms-view" onclick="alert('개인정보 수집·이용 동의 내용입니다.')">보기</span>
+            </div>
+            <div class="terms-item">
+              <div class="terms-item-left">
+                <input type="checkbox" class="custom-cb terms-cb" id="t3" onchange="syncAllTerms()" />
+                <label for="t3">구매 조건 확인 및 결제 진행 동의</label>
+                <span class="terms-badge">필수</span>
+              </div>
+              <span class="terms-view" onclick="alert('구매 조건 동의 내용입니다.')">보기</span>
+            </div>
+            <div class="terms-item">
+              <div class="terms-item-left">
+                <input type="checkbox" class="custom-cb terms-cb optional-cb" id="t4" onchange="syncAllTerms()" />
+                <label for="t4">마케팅 정보 수신 동의 (SMS, 이메일)</label>
+                <span class="terms-badge optional">선택</span>
+              </div>
+              <span class="terms-view" onclick="alert('마케팅 수신 동의 내용입니다.')">보기</span>
+            </div>
+          </div>
+        </div>
+        <span class="form-error" id="err-terms" style="margin-bottom:12px;">필수 약관에 동의해주세요.</span>
+
+        <!-- 결제하기 버튼 -->
+        <button class="btn btn-primary" id="btn-to-payment" onclick="handleGuestOrder()">
+          <span class="material-symbols-outlined">payments</span>
+          결제하기
+        </button>
+      </div><!-- /step-body -->
+
+      <div class="step-nav">
+        <button class="btn btn-ghost" onclick="goStep(0)">← 이전</button>
+        <div class="step-dots">
+          <div class="step-dot"></div>
+          <div class="step-dot active"></div>
+          <div class="step-dot"></div>
+          <div class="step-dot"></div>
+          <div class="step-dot"></div>
+        </div>
+      </div>
+    </div><!-- /step-2 -->
+
+    <!-- ===================================================
+         STEP 3: 결제 수단 선택
+    =================================================== -->
+    <div class="step-card" id="step-3" style="display:none;">
+      <div class="progress-bar"><div class="progress-bar-fill" style="width:80%"></div></div>
+
+      <div class="step-header">
+        <div class="step-label">STEP 4 / 5</div>
+        <div class="step-title">결제 수단 선택</div>
+        <div class="step-subtitle">원하시는 결제 방법을 선택해주세요.</div>
+      </div>
+
+      <div class="step-body">
+        <!-- 최종 금액 요약 -->
+        <div class="order-summary">
+          <div class="order-item">
+            <span class="order-item-name"> Natural (Medium)</span>
+            <span class="order-item-price">68,000원</span>
+          </div>
+          <div class="order-item">
+            <span class="order-item-name">배송비</span>
+            <span class="order-item-price">3,000원</span>
+          </div>
+          <div class="order-item">
+            <span class="order-item-name">최종 결제금액</span>
+            <span class="order-item-price">71,000원</span>
+          </div>
+        </div>
+
+        <!-- 간편결제 -->
+        <div class="pay-btn-label">간편결제</div>
+        <div class="btn-group" style="margin-bottom:16px;">
+          <!-- 카카오페이 -->
+          <button class="btn btn-kakao" onclick="startPayment('kakaopay')">
+            <!-- 카카오페이 로고 텍스트 (실제 환경에서는 SVG 아이콘 사용) -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <ellipse cx="12" cy="11" rx="10" ry="8" fill="#3C1E1E"/>
+              <circle cx="8.5" cy="10.5" r="1.5" fill="#FEE500"/>
+              <circle cx="12" cy="10.5" r="1.5" fill="#FEE500"/>
+              <circle cx="15.5" cy="10.5" r="1.5" fill="#FEE500"/>
+              <path d="M9 14.5c.8.8 2.2 1 3 1s2.2-.2 3-1" stroke="#FEE500" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            카카오페이로 결제
+          </button>
+          <!-- 네이버페이 -->
+          <button class="btn btn-naver" onclick="startPayment('naverpay')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <rect width="24" height="24" rx="4" fill="#03C75A"/>
+              <path d="M7 17V7l4 6V7h2v10l-4-6v6H7z" fill="white"/>
+              <path d="M15 7h2v10h-2z" fill="white"/>
+            </svg>
+            네이버페이로 결제
+          </button>
+        </div>
+
+        <div class="divider">또는</div>
+
+        <!-- 일반 결제 -->
+        <div class="pay-btn-label">일반 결제</div>
+        <div class="btn-group">
+          <button class="btn btn-outline" onclick="startPayment('card')">
+            <span class="material-symbols-outlined">credit_card</span>
+            신용/체크카드 결제
+          </button>
+          <button class="btn btn-outline" onclick="startPayment('transfer')">
+            <span class="material-symbols-outlined">account_balance</span>
+            무통장 입금 (계좌이체)
+          </button>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn btn-ghost" onclick="goStep(0)">← 처음으로</button>
+        <div class="step-dots">
+          <div class="step-dot"></div>
+          <div class="step-dot"></div>
+          <div class="step-dot"></div>
+          <div class="step-dot active"></div>
+          <div class="step-dot"></div>
+        </div>
+      </div>
+    </div><!-- /step-3 -->
+
+  </main><!-- /main -->
+
+  <!-- ===================================================
+       모달: 결제 진행 중
+  =================================================== -->
+  <div class="modal-overlay" id="modal-loading">
+    <div class="modal-box" id="modal-box-loading">
+      <div class="spinner"></div>
+      <div class="modal-title">결제 진행 중...</div>
+      <div class="modal-desc">잠시만 기다려주세요.<br/>결제 정보를 처리하고 있습니다.</div>
+    </div>
+  </div>
+
+  <!-- ===================================================
+       모달: 결제 완료 / 핸드폰 안내
+  =================================================== -->
+  <div class="modal-overlay" id="modal-done">
+    <div class="modal-box" id="modal-box-done">
+      <div class="success-icon">
+        <span class="material-symbols-outlined">smartphone</span>
+      </div>
+      <div class="modal-title">결제 요청 완료!</div>
+      <div class="modal-desc">주문이 성공적으로 접수되었습니다.</div>
+      <div class="phone-cta">
+        <p>👉 핸드폰으로 결제를 이어서 진행해주세요.</p>
+        <div class="sub">문자로 발송된 링크를 통해 최종 결제를 완료해주세요.</div>
+      </div>
+      <button class="btn btn-primary" onclick="closeDoneModal()" style="margin-top:24px;">
+        확인
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================================================
+       JavaScript — 단계 전환, 유효성 검사, 결제 흐름
+  =================================================== -->
+  <script>
+    /* ── 1. 단계 전환 ── */
+    function goStep(n) {
+      // 모든 step-card 숨기기
+      document.querySelectorAll('.step-card').forEach(el => el.style.display = 'none');
+      const target = document.getElementById('step-' + n);
+      if (!target) return;
+      target.style.display = 'block';
+      target.classList.remove('animate');
+      // 리플로우 트릭으로 애니메이션 재시작
+      void target.offsetWidth;
+      target.classList.add('animate');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ── 2. 전화번호 포맷 ── */
+    function formatPhoneInput(input) {
+      let v = input.value.replace(/\D/g, '');
+      if (v.length <= 3)      input.value = v;
+      else if (v.length <= 7) input.value = v.slice(0,3) + '-' + v.slice(3);
+      else                    input.value = v.slice(0,3) + '-' + v.slice(3,7) + '-' + v.slice(7,11);
+    }
+
+    /* ── 3. 배송 요청사항 직접입력 토글 ── */
+    function toggleCustomReq(select) {
+      const ta = document.getElementById('custom-req');
+      ta.style.display = select.value === 'custom' ? 'block' : 'none';
+    }
+
+    /* ── 4. 약관 전체 동의 ── */
+    function toggleAllTerms(master) {
+      document.querySelectorAll('.terms-cb').forEach(cb => cb.checked = master.checked);
+    }
+    function syncAllTerms() {
+      const all  = document.querySelectorAll('.terms-cb');
+      const allChecked = [...all].every(cb => cb.checked);
+      document.getElementById('terms-all').checked = allChecked;
+    }
+
+    /* ── 5. 데모용: 주소 검색 자동 채우기 ── */
+    function fillDemoAddress() {
+      document.getElementById('addr-zip').value  = '12345';
+      document.getElementById('addr-main').value = '서울특별시 강남구 테헤란로 123';
+    }
+
+    /* ── 6. 에러 표시 헬퍼 ── */
+    function showError(id, show) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.toggle('show', show);
+    }
+    function markInput(id, error) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.toggle('error', error);
+    }
+
+    /* ── 7. 회원 로그인 처리 ── */
+    function handleLogin() {
+      const id = document.getElementById('login-id').value.trim();
+      const pw = document.getElementById('login-pw').value.trim();
+      let valid = true;
+
+      if (!id) {
+        showError('err-login-id', true);
+        markInput('login-id', true);
+        valid = false;
+      } else {
+        showError('err-login-id', false);
+        markInput('login-id', false);
+      }
+
+      if (!pw) {
+        showError('err-login-pw', true);
+        markInput('login-pw', true);
+        valid = false;
+      } else {
+        showError('err-login-pw', false);
+        markInput('login-pw', false);
+      }
+
+      if (!valid) {
+        // 흔들기 효과
+        const btn = document.querySelector('#step-1 .btn-primary');
+        btn.classList.add('shake');
+        setTimeout(() => btn.classList.remove('shake'), 500);
+        return;
+      }
+
+      // 로그인 성공 → 결제 수단 선택 단계로
+      goStep(3);
+    }
+
+    /* ── 8. 비회원 주문 폼 유효성 검사 및 다음 단계 이동 ── */
+    function handleGuestOrder() {
+      let valid = true;
+
+      // 이름
+      const name = document.getElementById('buyer-name').value.trim();
+      if (!name) { showError('err-buyer-name', true); markInput('buyer-name', true); valid = false; }
+      else        { showError('err-buyer-name', false); markInput('buyer-name', false); }
+
+      // 연락처 (간단 검사: 숫자 10~11자리)
+      const phone = document.getElementById('buyer-phone').value.replace(/\D/g,'');
+      if (phone.length < 10) { showError('err-buyer-phone', true); markInput('buyer-phone', true); valid = false; }
+      else                   { showError('err-buyer-phone', false); markInput('buyer-phone', false); }
+
+      // 이메일
+      const email = document.getElementById('buyer-email').value.trim();
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!emailOk) { showError('err-buyer-email', true); markInput('buyer-email', true); valid = false; }
+      else          { showError('err-buyer-email', false); markInput('buyer-email', false); }
+
+      // 주소
+      const zip = document.getElementById('addr-zip').value.trim();
+      if (!zip) { showError('err-addr', true); valid = false; }
+      else      { showError('err-addr', false); }
+
+      // 상세주소
+      const detail = document.getElementById('addr-detail').value.trim();
+      if (!detail) { showError('err-addr-detail', true); markInput('addr-detail', true); valid = false; }
+      else         { showError('err-addr-detail', false); markInput('addr-detail', false); }
+
+      // 필수 약관 (t1, t2, t3)
+      const requiredTerms = ['t1','t2','t3'];
+      const termsOk = requiredTerms.every(id => document.getElementById(id).checked);
+      if (!termsOk) { showError('err-terms', true); valid = false; }
+      else          { showError('err-terms', false); }
+
+      if (!valid) {
+        // 흔들기 효과
+        const btn = document.getElementById('btn-to-payment');
+        btn.classList.add('shake');
+        setTimeout(() => btn.classList.remove('shake'), 500);
+        // 첫 번째 에러 입력란으로 스크롤
+        const firstError = document.querySelector('#step-2 .form-input.error, #step-2 .form-textarea.error');
+        if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      // 유효성 통과 → 결제 수단 선택 단계로
+      goStep(3);
+    }
+
+    /* ── 9. 결제 수단 선택 → 결제 진행 모달 → 완료 모달 ── */
+    function startPayment(method) {
+      // 결제 진행 중 모달 열기
+      showModal('modal-loading');
+
+      // 2.5초 후 로딩 모달 닫고 완료 모달 열기
+      setTimeout(function() {
+        hideModal('modal-loading');
+        setTimeout(function() {
+          showModal('modal-done');
+        }, 200);
+      }, 2500);
+    }
+
+    /* 모달 열기/닫기 헬퍼 */
+    function showModal(id) {
+      document.getElementById(id).classList.add('show');
+    }
+    function hideModal(id) {
+      document.getElementById(id).classList.remove('show');
+    }
+
+    /* 완료 모달 닫기 → 장바구니 비우고 메인으로 */
+    function closeDoneModal() {
+      localStorage.removeItem('nhj_cart');
+      location.href = 'indexnewmain.html';
+    }
+
+    /* ── 장바구니 데이터 → 주문 요약 렌더링 ── */
+    function renderOrderSummary() {
+      const box = document.getElementById('order-summary-box');
+      if (!box) return;
+
+      let items = [];
+      try { items = JSON.parse(localStorage.getItem('nhj_cart')) || []; } catch(e) {}
+
+      if (items.length === 0) {
+        box.innerHTML = '<div class="order-item"><span class="order-item-name" style="color:var(--text-muted);">담긴 상품이 없습니다.</span></div>';
+        return;
+      }
+
+      const total = items.reduce((s, i) => s + i.priceNum * i.qty, 0);
+      const shipping = total >= 100000 ? 0 : 3000;
+      const finalTotal = total + shipping;
+
+      let rows = items.map(i =>
+        `<div class="order-item">
+          <span class="order-item-name">${i.name} (${i.size}) × ${i.qty}</span>
+          <span class="order-item-price">${(i.priceNum * i.qty).toLocaleString()}원</span>
+        </div>`
+      ).join('');
+
+      rows += `<div class="order-item">
+        <span class="order-item-name">배송비</span>
+        <span class="order-item-price">${shipping === 0 ? '무료' : shipping.toLocaleString() + '원'}</span>
+      </div>
+      <div class="order-item" style="font-weight:700;color:var(--primary);border-top:1px solid var(--border);padding-top:10px;margin-top:4px;">
+        <span class="order-item-name">최종 결제금액</span>
+        <span class="order-item-price">${finalTotal.toLocaleString()}원</span>
+      </div>`;
+
+      box.innerHTML = rows;
+    }
+
+    document.addEventListener('DOMContentLoaded', renderOrderSummary);
+  </script>
+
+<script src="nhj-common.js"></script>
+</body>
+</html>

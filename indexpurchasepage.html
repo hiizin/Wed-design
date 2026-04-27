@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html class="scroll-smooth light" lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Natural Harmony Journey - 제품 상세</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link as="style" crossorigin="" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#4a6545",
+              "on-primary": "#ffffff",
+              "background": "#fbf9f8",
+              "surface": "#fbf9f8",
+              "on-surface": "#1b1c1c",
+              "secondary-container": "#dbe5d8",
+              "on-secondary-container": "#4a6545",
+              "outline": "#73796f",
+              "outline-variant": "#c3c8bd",
+              "surface-container-low": "#f5f3f3",
+              "surface-container": "#efeded",
+              "surface-container-high": "#eae8e7",
+              "surface-container-highest": "#e4e2e2",
+              "surface-container-lowest": "#ffffff",
+              "surface-variant": "#e4e2e2",
+              "primary-container": "#a8c69f",
+              "tertiary": "#48663d",
+              "tertiary-container": "#a5c796",
+              "on-tertiary-container": "#37542d",
+              "on-surface-variant": "#434840",
+              "secondary": "#576157",
+              "on-background": "#1b1c1c"
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px"
+            },
+            spacing: {
+              xs: "4px", sm: "8px", md: "16px", lg: "24px",
+              gutter: "24px", xl: "48px", section: "80px",
+              "container-max": "1280px", unit: "4px"
+            },
+            fontFamily: {
+              sans: ["Pretendard", "sans-serif"],
+              "headline-xl": ["Pretendard"],
+              "headline-lg": ["Pretendard"],
+              "headline-md": ["Pretendard"],
+              "body-lg": ["Pretendard"],
+              "body-md": ["Pretendard"],
+              "label-sm": ["Pretendard"]
+            },
+            fontSize: {
+              "headline-xl": ["48px", {lineHeight:"1.2", letterSpacing:"-0.02em", fontWeight:"700"}],
+              "headline-lg": ["32px", {lineHeight:"1.3", letterSpacing:"-0.01em", fontWeight:"700"}],
+              "headline-md": ["24px", {lineHeight:"1.4", fontWeight:"600"}],
+              "body-lg": ["18px", {lineHeight:"1.6", fontWeight:"400"}],
+              "body-md": ["16px", {lineHeight:"1.6", fontWeight:"400"}],
+              "label-sm": ["12px", {lineHeight:"1.0", letterSpacing:"0.02em", fontWeight:"600"}]
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        body { background-color: #fbf9f8; color: #1b1c1c; font-family: 'Pretendard', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="font-sans overflow-x-hidden">
+
+    <!-- 공통 헤더 -->
+    <header data-nhj-header></header>
+
+    <main class="max-w-[1440px] mx-auto px-8 md:px-12 pt-8">
+        <!-- Product Hero Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-section">
+
+            <!-- Left: Gallery -->
+            <div class="lg:col-span-7 flex flex-col-reverse md:flex-row gap-6">
+                <!-- Thumbnails -->
+                <div class="flex md:flex-col gap-4 overflow-x-auto md:overflow-y-auto no-scrollbar md:w-24">
+                </div>
+                <!-- Main Image -->
+                <div class="flex-1 bg-surface-container-low rounded-lg overflow-hidden relative group">
+                    <img alt="식물이름" id="product-img" class="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArLFBuH3cELpBSJqoce1NQe7QC9n2gAmRCyFwi8d1adDDyAZePNm7_-QqO-r1aezZYXfISXIeDBsl9MVhYnUBndmvW3OVZd6D_7AOXMyV1qC4Au29_TJKphA5K9M4kkVF9DD9pIpiJp0fVbCj9wcJlx_iVBFP_Aap6XvHOu6SsGMGGSbkZ_ubCnfYoSXxCm8bZhOllCZk_j3lZ7ky0117wBMhx3T3U-2LO6uEXorp_jPF_tBQtcZaxnyTv6jKuuOg1zv57T0YkWu6a"/>
+                    <div class="absolute bottom-6 right-6">
+                        <button class="bg-white/80 backdrop-blur shadow-md p-3 rounded-full hover:bg-white transition-colors">
+                            <span class="material-symbols-outlined">zoom_in</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Product Info -->
+            <div class="lg:col-span-5 flex flex-col">
+                <div class="mb-4">
+                    <span class="bg-secondary-container text-on-secondary-container px-4 py-1.5 rounded-full text-[12px] font-semibold" id="product-tag">재고 있음</span>
+                </div>
+                <h1 id="product-name" class="text-[48px] font-bold leading-tight tracking-tight text-primary mb-2">식물 이름</h1>
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="flex text-amber-500">
+                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 0.5;">star_half</span>
+                    </div>
+                    <span class="text-on-surface-variant text-[16px] font-medium">(리뷰 124개)</span>
+                </div>
+                <div id="product-price" class="text-[24px] text-primary font-bold mb-8">₩64,000</div>
+
+                <div class="space-y-8 mb-10">
+                    <!-- Size Selection -->
+                    <div>
+                        <span class="text-[12px] font-semibold text-on-surface-variant mb-4 block">크기</span>
+                        <div class="flex gap-3">
+                            <button class="px-8 py-2.5 border-2 border-primary text-primary font-bold rounded-lg bg-primary-container/30">Medium</button>
+                            <button class="px-8 py-2.5 border border-outline-variant text-on-surface-variant font-medium rounded-lg hover:border-primary transition-colors">Large</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Delivery Info -->
+                <div class="bg-surface-container rounded-lg p-6 mb-10 space-y-4">
+                    <div class="flex items-center space-x-4">
+                        <span class="material-symbols-outlined text-primary">local_shipping</span>
+                        <div>
+                            <p class="text-[16px] font-bold text-primary">무료 배송</p>
+                            <p class="text-[12px] font-semibold text-on-surface-variant">10만원 이상 구매 시. 예상 도착일: 5월 2~3일.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="material-symbols-outlined text-primary">verified</span>
+                        <div>
+                            <p class="text-[16px] font-bold text-primary">품질 보증</p>
+                            <p class="text-[12px] font-semibold text-on-surface-variant">모든 식물에 대한 2년 무상 보증.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-col gap-3 mt-auto">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="purchase-flow.html" class="flex-1">
+                            <button class="w-full bg-primary text-on-primary py-5 rounded-lg font-bold text-lg hover:bg-primary/90 transition-all active:scale-[0.98]">구매하기</button>
+                        </a>
+                        <button id="add-to-cart-btn"
+                            class="sm:w-16 w-full h-16 border-2 border-primary text-primary flex items-center justify-center rounded-lg hover:bg-primary-container/20 transition-all active:scale-[0.98]"
+                            onclick="addCurrentToCart()"
+                            title="장바구니에 담기">
+                            <span class="material-symbols-outlined">shopping_cart</span>
+                        </button>
+                    </div>
+                    <p id="cart-feedback" class="text-center text-sm text-[#4a6545] font-semibold opacity-0 transition-opacity duration-300">
+                        ✓ 장바구니에 담겼습니다
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Description Section -->
+        <section class="mb-section">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-16">
+                <div class="order-2 md:order-1">
+                    <h2 id="desc-headline" class="text-[32px] font-bold leading-tight text-primary mb-6">의식을 위한 디자인, 영속성을 향한 장인정신</h2>
+                    <p id="desc-body" class="text-[18px] text-on-surface-variant mb-8 leading-relaxed">
+                        버던트 미스트 분무기는 단순한 도구가 아닌, 여러분의 보태니컬 여정의 연장선입니다. 정밀한 압축 펌프로 설계되어, 열대 우림의 아침 이슬을 닮은 초미세 연속 안개를 선사합니다.
+                    </p>
+                    <ul id="desc-features" class="space-y-4 text-[16px] text-on-surface font-medium">
+                        <li class="flex items-start space-x-3">
+                            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            <span>피로를 줄여주는 인체공학적 황동 손잡이</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            <span>변색을 방지하는 UV 저항 매트 피니시</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            <span>깔끔한 사용을 위한 제로 드립 노즐 기술</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-surface-container-low p-10 rounded-lg border border-outline-variant/10">
+                    <h3 class="text-[24px] font-semibold text-primary mb-4">관리 방법</h3>
+                    <p id="info-care" class="text-[16px] text-on-surface-variant">한 달에 한 번 따뜻한 증류수로 헹구어 노즐의 미네랄 침전물을 방지하세요. 외관은 마른 천으로만 닦아주세요.</p>
+                </div>
+                <div class="bg-surface-container-low p-10 rounded-lg border border-outline-variant/10">
+                    <h3 class="text-[24px] font-semibold text-primary mb-4">친환경 소재</h3>
+                    <p id="info-material" class="text-[16px] text-on-surface-variant">40% 재활용 식물성 폴리머와 순수 산업용 황동으로 제작되었습니다. 100% 플라스틱 프리 배송 패키지를 사용합니다.</p>
+                </div>
+                <div class="bg-surface-container-low p-10 rounded-lg border border-outline-variant/10">
+                    <h3 class="text-[24px] font-semibold text-primary mb-4">전문가 팁</h3>
+                    <p id="info-tip" class="text-[16px] text-on-surface-variant">칼라테아나 몬스테라는 아침 일찍 분무하여 강한 햇빛이 들기 전에 잎이 마를 수 있도록 하세요.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabs & Reviews -->
+        <section class="border-t border-outline-variant pt-section mb-section">
+            <div class="flex border-b border-outline-variant mb-12 overflow-x-auto no-scrollbar">
+                <button class="px-10 py-5 font-bold text-primary border-b-4 border-primary whitespace-nowrap">배송 및 반품</button>
+                <button class="px-10 py-5 font-bold text-on-surface-variant hover:text-primary whitespace-nowrap transition-colors">Q&A 섹션</button>
+                <button class="px-10 py-5 font-bold text-on-surface-variant hover:text-primary whitespace-nowrap transition-colors">구매 후기 (124)</button>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+                <div>
+                    <h4 class="text-[24px] font-semibold text-primary mb-6">반품 정책</h4>
+                    <p class="text-[16px] text-on-surface-variant mb-8 leading-relaxed">우리는 30일간의 "젠 보증"을 제공합니다. 안전 배송에 완전히 만족하지 못하신다면, 이유를 묻지 않고 전액 환불해 드립니다.</p>
+                    <a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">상세 배송 안내 보기</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 공통 푸터 -->
+    <footer data-nhj-footer></footer>
+    <script>
+    // ============================================================
+    // 상품 데이터 (id 1~16)
+    // ※ 텍스트 수정 시 각 id 항목의 값만 바꾸세요.
+    //
+    // 필드 설명:
+    //   name      - 상품명
+    //   tag       - 카테고리 태그 (이미지 아래 배지)
+    //   price     - 가격 (₩ 포함)
+    //   img       - 메인 이미지 URL
+    //   descHeadline  - 상세 설명 제목 (h2)
+    //   descBody      - 상세 설명 본문 (p)
+    //   descFeatures  - 특징 목록 (배열, 체크리스트 항목들)
+    //   infoCare      - 관리 방법 내용
+    //   infoMaterial  - 친환경 소재 내용
+    //   infoTip       - 전문가 팁 내용
+    // ============================================================
+    const PRODUCTS = {
+      1: {
+        name: "여인목",
+        tag: "실내용 · 대형",
+        price: "₩89,000",
+        img: "https://contents.sixshop.com/thumbnails/uploadedFiles/20883/product/image_1701421663258_750.jpg",
+        descHeadline: "이국적인 분위기를 완성하는 우아한 열대 식물",
+        descBody: "여인목은 부드럽게 퍼지는 잎과 독특한 실루엣으로 공간에 자연스러운 고급스러움을 더합니다. 실내에서도 잘 자라며, 차분한 분위기를 만들어주는 대표적인 관엽식물입니다.",
+        descFeatures: ["공간을 넓어 보이게 하는 수형", "인테리어 효과가 뛰어난 이국적 느낌", "비교적 쉬운 관리 난이도"],
+        infoCare: "밝은 간접광에서 키우며, 겉흙이 마르면 물을 주세요. 통풍이 좋은 환경을 유지하세요.",
+        infoMaterial: "40% 재활용 식물성 폴리머와 순수 산업용 황동으로 제작되었습니다. 100% 플라스틱 프리 배송 패키지를 사용합니다.",
+        infoTip: "잎에 먼지가 쌓이면 광합성이 줄어드니 부드러운 천으로 주기적으로 닦아주세요."
+      },
+      2: {
+        name: "아라우카리아",
+        tag: "관상수 · 대형",
+        price: "₩75,000",
+        img: "https://contents.sixshop.com/thumbnails/uploadedFiles/20883/product/image_1732090805163_750.jpg",
+        descHeadline: "크리스마스 트리를 닮은 사계절 감성 식물",
+        descBody: "아라우카리아는 층층이 자라는 가지 구조가 특징으로, 마치 작은 나무처럼 자랍니다. 실내에서 키우기 좋은 침엽수로 사계절 내내 싱그러움을 제공합니다.",
+        descFeatures: ["독특한 트리 형태", "사계절 푸른 잎 유지", "감성적인 공간 연출"],
+        infoCare: "직사광선은 피하고 밝은 곳에서 키우세요. 흙이 마르면 충분히 물을 줍니다.",
+        infoMaterial: "40% 재활용 식물성 폴리머와 순수 산업용 황동으로 제작되었습니다. 100% 플라스틱 프리 배송 패키지를 사용합니다.",
+        infoTip: "건조한 환경에서는 잎 끝이 마를 수 있으니 가습을 신경 써주세요."
+      },
+      3: {
+        name: "프렌치라벤더",
+        tag: "반음지 · 중형",
+        price: "₩22,000",
+        img: "https://thumbnail.coupangcdn.com/thumbnails/remote/492x492ex/image/vendor_inventory/d0ca/aa953a48c411da0806a070506750821575bcbbe0e19093665ed5de224da7.png",
+        descHeadline: "향기로 공간을 채우는 힐링 허브",
+        descBody: "프렌치 라벤더는 은은한 향과 보랏빛 꽃으로 사랑받는 식물입니다. 스트레스를 완화시키는 향기로 실내 분위기를 한층 부드럽게 만들어줍니다.",
+        descFeatures: ["심신 안정에 도움 되는 향", "아름다운 꽃 색감", "허브로 활용 가능"],
+        infoCare: "햇빛이 잘 드는 곳에서 키우고, 과습을 피하며 물을 적당히 주세요.",
+        infoMaterial: "40% 재활용 식물성 폴리머와 순수 산업용 황동으로 제작되었습니다. 100% 플라스틱 프리 배송 패키지를 사용합니다.",
+        infoTip: "통풍이 부족하면 곰팡이가 생기기 쉬우니 환기를 자주 해주세요."
+      },
+      4: {
+        name: "보석란",
+        tag: "반음지 · 중형",
+        price: "₩50,000",
+        img: "https://botanical.house/wp-content/uploads/2020/09/re_3bdb1c.jpg",
+        descHeadline: "잎 자체가 빛나는 특별한 난초",
+        descBody: "보석란은 화려한 잎맥이 특징으로, 꽃보다 잎을 감상하는 식물입니다. 은은하게 빛나는 잎이 고급스러운 분위기를 만들어줍니다.",
+        descFeatures: ["독특한 잎 패턴", "실내 장식 효과", "희소성 있는 식물"],
+        infoCare: "반그늘에서 키우며 흙이 마르면 물을 주세요.",
+        infoMaterial: "40% 재활용 식물성 폴리머와 순수 산업용 황동으로 제작되었습니다. 100% 플라스틱 프리 배송 패키지를 사용합니다.",
+        infoTip: "직사광선을 받으면 잎 색이 바랠 수 있으니 주의하세요."
+      },
+      5: {
+        name: "유칼립투스",
+        tag: "덩굴 · 수경 재배",
+        price: "₩25,000",
+        img: "https://f-mans.com/data/goods/1/2024/02/861_temp_17078039247780view.jpg",
+        descHeadline: "청량한 향을 가진 자연 공기 정화 식물",
+        descBody: "유칼립투스는 상쾌한 향과 은빛 잎으로 유명합니다. 공간에 자연스러운 향을 더해주며, 인테리어 소품으로도 활용됩니다.",
+        descFeatures: ["공기 정화 효과", "감성적인 색감", "향기 테라피"],
+        infoCare: "햇빛이 충분한 곳에서 키우고 물은 과하지 않게 주세요.",
+        infoMaterial: "40% 재활용 식물성 폴리머와 순수 산업용 황동으로 제작되었습니다. 100% 플라스틱 프리 배송 패키지를 사용합니다.",
+        infoTip: "잎을 말려 방향제로 활용할 수 있습니다."
+      },
+      6: {
+        name: "떡갈고무나무",
+        tag: "관상수 · 공기 정화",
+        price: "₩100,000",
+        img: "https://contents.sixshop.com/thumbnails/uploadedFiles/20883/product/image_1639040636066_750.jpeg",
+        descHeadline: "넓고 묵직한 잎이 매력적인 인기 식물",
+        descBody: "떡갈고무나무는 두껍고 큰 잎이 특징으로, 실내에서 존재감 있는 포인트를 만들어줍니다.",
+        descFeatures: ["강한 존재감", "공기 정화 기능", "관리 난이도 낮음"],
+        infoCare: "밝은 간접광에서 키우고, 흙이 마르면 물을 주세요.",
+        infoMaterial: "40% 재활용 식물성 폴리머와 순수 산업용 황동으로 제작되었습니다. 100% 플라스틱 프리 배송 패키지를 사용합니다.",
+        infoTip: "잎에 물을 분무해주면 건강하게 유지됩니다."
+      },
+      7: {
+        name: "바질",
+        tag: "허브 · 식용",
+        price: "₩5,000",
+        img: "https://housoop.com/data/goods/11/2023/06/255_temp_16861853484336view.jpg",
+        descHeadline: "요리와 향을 동시에 즐기는 허브",
+        descBody: "바질은 요리에 활용 가능한 대표 허브로, 신선한 향과 맛을 제공합니다.",
+        descFeatures: ["요리 활용 가능", "빠른 성장", "향기 좋은 식물"],
+        infoCare: "햇빛이 충분한 곳에서 키우고, 물은 자주 주세요.",
+        infoMaterial: "40% 재활용 식물성 폴리머와 순수 산업용 황동으로 제작되었습니다. 100% 플라스틱 프리 배송 패키지를 사용합니다.",
+        infoTip: "잎을 자주 수확하면 더 풍성하게 자랍니다."
+      },
+      8: {
+        name: "개운죽",
+        tag: "초보자 · 수경 재배",
+        price: "₩3,000",
+        img: "https://item.elandrs.com/upload/prd/orgimg/889/2108223889_0000001.jpg?w=750&h=&q=100",
+        descHeadline: "행운을 불러오는 대표적인 수경 식물",
+        descBody: "개운죽은 물만으로도 키울 수 있어 관리가 간편하며, 풍수적으로 좋은 의미를 가집니다.",
+        descFeatures: ["관리 쉬움", "물 재배 가능", "행운 상징"],
+        infoCare: "물은 주기적으로 갈아주고 직사광선은 피하세요.",
+        infoMaterial: "40% 재활용 식물성 폴리머와 순수 산업용 황동으로 제작되었습니다. 100% 플라스틱 프리 배송 패키지를 사용합니다.",
+        infoTip: "물에 활성탄을 넣으면 더 깨끗하게 유지됩니다."
+      },
+      9: {
+        name: "뱅갈고무나무",
+        tag: "실내용 · 대형",
+        price: "₩80,000",
+        img: "https://www.cultwo-flower.com/shopimages/c2c2/025004000077.jpg",
+        descHeadline: "자연스러운 곡선이 아름다운 고급 식물",
+        descBody: "뱅갈고무나무는 부드러운 곡선의 줄기와 풍성한 잎으로 인테리어 효과가 뛰어납니다.",
+        descFeatures: ["고급스러운 분위기", "공기 정화", "튼튼한 생명력"],
+        infoCare: "밝은 곳에서 키우고 과습을 피하세요.",
+        infoMaterial: "40% 재활용 식물성 폴리머와 순수 산업용 황동으로 제작되었습니다. 100% 플라스틱 프리 배송 패키지를 사용합니다.",
+        infoTip: "주기적으로 화분 방향을 바꿔 균형 있게 성장시키세요."
+      },
+      10: {
+        name: "무륜주",
+        tag: "선인장 · 중형",
+        price: "₩200,000",
+        img: "https://contents.sixshop.com/thumbnails/uploadedFiles/20883/product/image_1758013443840_1500.jpeg",
+        descHeadline: "독특한 형태로 시선을 사로잡는 선인장",
+        descBody: "무륜주는 원형의 독특한 구조로 장식성이 뛰어난 다육식물입니다.",
+        descFeatures: ["유니크한 형태", "관리 쉬움", "인테리어 포인트"],
+        infoCare: "햇빛을 충분히 받고 물은 적게 주세요.",
+        infoMaterial: "40% 재활용 식물성 폴리머와 순수 산업용 황동으로 제작되었습니다. 100% 플라스틱 프리 배송 패키지를 사용합니다.",
+        infoTip: "과습은 뿌리 썩음의 원인이 됩니다."
+      },
+      11: {
+        name: "호야",
+        tag: "공기 정화 · 덩굴 식물",
+        price: "₩19,000",
+        img: "https://www.wishbucket.io/_next/image?url=https%3A%2F%2Fd2gfz7wkiigkmv.cloudfront.net%2Fpickin%2F2%2F1%2F2%2FInYl-guhQP6EJfp8yLjSrw&w=1080&q=75",
+        descHeadline: "왁스처럼 반짝이는 잎과 꽃의 조화",
+        descBody: "호야는 두꺼운 잎과 별 모양 꽃이 특징으로, 시간이 지나며 더 아름다워지는 식물입니다.",
+        descFeatures: ["꽃과 잎 모두 매력적", "관리 쉬움", "덩굴형 성장"],
+        infoCare: "밝은 간접광에서 키우고 물은 적당히 주세요.",
+        infoMaterial: "40% 재활용 식물성 폴리머와 순수 산업용 황동으로 제작되었습니다. 100% 플라스틱 프리 배송 패키지를 사용합니다.",
+        infoTip: "화분을 자주 옮기면 꽃이 덜 필 수 있습니다."
+      },
+      12: {
+        name: "아데늄",
+        tag: "희귀 식물 · 사막 장미",
+        price: "₩35,000",
+        img: "https://ecimg.cafe24img.com/pg955b49925335084/sikmulhaengsung/web/product/small/20260110/9f9eab17193fa454ecc165fce10288de.jpg",
+        descHeadline: "두툼한 괴근과 화려한 꽃을 동시에 가진 사막의 예술 작품",
+        descBody: "아데늄은 굵게 부풀어 오른 줄기(괴근)와 선명한 꽃이 조화를 이루는 독특한 식물입니다. 건조한 환경에 적응한 형태 덕분에 조형미가 뛰어나며, 시간이 지날수록 더욱 개성 있는 수형으로 변해가는 매력을 지닙니다.",
+        descFeatures: ["조형미가 뛰어난 독특한 외형", "선명하고 화려한 꽃 감상", "비교적 적은 물 관리로 키우기 쉬움"],
+        infoCare: "햇빛이 잘 드는 곳에서 키우며, 흙이 완전히 마른 후 물을 주세요. 배수가 좋은 토양을 사용하는 것이 중요합니다.",
+        infoMaterial: "40% 재활용 식물성 폴리머와 순수 산업용 황동으로 제작되었습니다. 100% 플라스틱 프리 배송 패키지를 사용합니다.",
+        infoTip: "겨울철에는 휴면기에 들어가므로 물 주는 횟수를 줄이고, 저온에 노출되지 않도록 관리하세요."
+      },
+      13: {
+        name: "스킨답서스",
+        tag: "수경 재배 · 초보자 추천",
+        price: "₩8,000",
+        img: "https://www.nongsaro.go.kr/cms_contents/301/19716_MF_ATTACH_01.gif",
+        descHeadline: "초보자도 쉽게 키우는 대표 공기정화 식물",
+        descBody: "스킨답서스는 강한 생명력으로 어디서나 잘 자라며, 실내 공기 개선에 도움을 줍니다.",
+        descFeatures: ["관리 매우 쉬움", "공기 정화 효과", "다양한 연출 가능"],
+        infoCare: "반그늘에서도 잘 자라며 물은 적당히 주세요.",
+        infoMaterial: "40% 재활용 식물성 폴리머와 순수 산업용 황동으로 제작되었습니다. 100% 플라스틱 프리 배송 패키지를 사용합니다.",
+        infoTip: "줄기를 잘라 물에 꽂으면 쉽게 번식됩니다."
+      },
+      14: {
+        name: "관음죽",
+        tag: "공기 정화 · 대형",
+        price: "₩50,000",
+        img: "https://nongsaro.go.kr/cms_contents/301/12963_MF_ATTACH_01.jpg",
+        descHeadline: "차분한 분위기를 만드는 동양적 식물",
+        descBody: "관음죽은 단정한 잎 배열로 고요하고 안정된 공간을 연출합니다.",
+        descFeatures: ["고급스러운 분위기", "공기 정화", "음지에서도 생육 가능"],
+        infoCare: "직사광선을 피하고 흙이 마르면 물을 주세요.",
+        infoMaterial: "40% 재활용 식물성 폴리머와 순수 산업용 황동으로 제작되었습니다. 100% 플라스틱 프리 배송 패키지를 사용합니다.",
+        infoTip: "온도 변화에 민감하니 일정하게 유지하세요."
+      },
+      15: {
+        name: "테이블야자",
+        tag: "인테리어 · 대형",
+        price: "₩80,000",
+        img: "https://www.ozflower.co.kr/data/item/thumb-1563437388698l0_700x700.jpg",
+        descHeadline: "내 방에 어울리는 야자수",
+        descBody: "테이블야자는 작은 크기로 책상이나 테이블 위에서 키우기 좋은 식물입니다.",
+        descFeatures: ["수려한 디자인", "공기 정화", "부드러운 잎"],
+        infoCare: "밝은 간접광에서 키우고 흙이 마르면 물을 주세요.",
+        infoMaterial: "40% 재활용 식물성 폴리머와 순수 산업용 황동으로 제작되었습니다. 100% 플라스틱 프리 배송 패키지를 사용합니다.",
+        infoTip: "건조하면 잎 끝이 마르니 가습이 중요합니다."
+      },
+      16: {
+        name: "스투키",
+        tag: "방치형 · 전자파 차단",
+        price: "₩18,000",
+        img: "https://image.8dogam.com/resized/product/asset/v1/upload/bb18569146594bf797104c77e448c944.jpg?type=big&res=2x&ext=webp",
+        descHeadline: "밤에도 산소를 내뿜는 공기정화 식물",
+        descBody: "스투키는 다육질 잎을 가진 식물로, 침실에서도 키우기 좋은 대표 식물입니다.",
+        descFeatures: ["공기 정화 능력", "관리 매우 쉬움", "인테리어 효과"],
+        infoCare: "물은 아주 적게 주고 햇빛이 있는 곳에 두세요.",
+        infoMaterial: "40% 재활용 식물성 폴리머와 순수 산업용 황동으로 제작되었습니다. 100% 플라스틱 프리 배송 패키지를 사용합니다.",
+        infoTip: "과습이 가장 큰 실패 원인이니 주의하세요."
+      }
+    };
+
+
+    // 장바구니 담기
+    function addCurrentToCart() {
+        const params = new URLSearchParams(window.location.search);
+        const id = parseInt(params.get('id'), 10);
+        const product = PRODUCTS[id];
+        if (!product) return;
+
+        // 선택된 사이즈
+        const sizeButtons = document.querySelectorAll('.flex.gap-3 button');
+        let selectedSize = 'Medium';
+        sizeButtons.forEach(btn => {
+            if (btn.classList.contains('border-primary') && btn.classList.contains('font-bold')) {
+                selectedSize = btn.textContent.trim();
+            }
+        });
+
+        // 가격 숫자만 추출
+        const priceNum = parseInt(product.price.replace(/[^0-9]/g, ''), 10);
+
+        NHJCart.addItem({
+            id,
+            name: product.name,
+            price: product.price,
+            priceNum,
+            img: product.img,
+            size: selectedSize
+        });
+
+        // 피드백 표시
+        const fb = document.getElementById('cart-feedback');
+        if (fb) {
+            fb.style.opacity = '1';
+            setTimeout(() => { fb.style.opacity = '0'; }, 2000);
+        }
+    }
+
+    // 사이즈 버튼 토글
+    document.addEventListener('DOMContentLoaded', () => {
+        const sizeBtns = document.querySelectorAll('.flex.gap-3 button');
+        sizeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                sizeBtns.forEach(b => {
+                    b.classList.remove('border-primary','font-bold','bg-primary-container/30','border-2');
+                    b.classList.add('border-outline-variant','font-medium','border');
+                });
+                btn.classList.add('border-primary','font-bold','border-2','bg-primary-container/30');
+                btn.classList.remove('border-outline-variant','font-medium','border');
+            });
+        });
+    });
+
+    // ============================================================
+    // URL 파라미터에서 id를 읽어 페이지에 적용 — 수정 불필요
+    // ============================================================
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const id = parseInt(params.get("id"), 10);
+      const product = PRODUCTS[id];
+
+      if (!product) return; // id가 없거나 범위 밖이면 기본 HTML 그대로 표시
+
+      // 메인 이미지
+      const imgEl = document.getElementById("product-img");
+      if (imgEl) { imgEl.src = product.img; imgEl.alt = product.name; }
+
+      // 상품명 (h1, 브레드크럼)
+      const nameEl = document.getElementById("product-name");
+      const bcEl   = document.getElementById("breadcrumb-name");
+      if (nameEl) nameEl.textContent = product.name;
+      if (bcEl)   bcEl.textContent   = product.name;
+
+      // 가격
+      const priceEl = document.getElementById("product-price");
+      if (priceEl) priceEl.textContent = product.price;
+
+      // 카테고리 태그
+      const tagEl = document.getElementById("product-tag");
+      if (tagEl) tagEl.textContent = product.tag;
+
+      // 상세 설명 — 제목
+      const headlineEl = document.getElementById("desc-headline");
+      if (headlineEl) headlineEl.textContent = product.descHeadline;
+
+      // 상세 설명 — 본문
+      const bodyEl = document.getElementById("desc-body");
+      if (bodyEl) bodyEl.textContent = product.descBody;
+
+      // 상세 설명 — 체크리스트 (배열을 li 태그로 렌더링)
+      const featuresEl = document.getElementById("desc-features");
+      if (featuresEl && Array.isArray(product.descFeatures)) {
+        featuresEl.innerHTML = product.descFeatures.map(function(f) {
+          return '<li class="flex items-start space-x-3">'
+               + '<span class="material-symbols-outlined text-primary" style="font-variation-settings: \'FILL\' 1;">check_circle</span>'
+               + '<span>' + f + '</span>'
+               + '</li>';
+        }).join('');
+      }
+
+      // 정보 카드 — 관리 방법
+      const careEl = document.getElementById("info-care");
+      if (careEl) careEl.textContent = product.infoCare;
+
+      // 정보 카드 — 친환경 소재
+      const materialEl = document.getElementById("info-material");
+      if (materialEl) materialEl.textContent = product.infoMaterial;
+
+      // 정보 카드 — 전문가 팁
+      const tipEl = document.getElementById("info-tip");
+      if (tipEl) tipEl.textContent = product.infoTip;
+
+      // 페이지 타이틀
+      document.title = product.name + " - Natural Harmony Journey";
+    })();
+    </script>
+<script src="nhj-common.js"></script>
+</body>
+</html>
